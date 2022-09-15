@@ -32,7 +32,7 @@ get_weather_forecaset_by_cities <- function(city_names){
     # Forecast API URL
     forecast_url <- 'https://api.openweathermap.org/data/2.5/forecast'
     # Create query parameters
-    forecast_query <- list(q = city_names, appid = "ef9bb0dd91538d62881342afe14fa979", units="metric")
+    forecast_query <- list(q = name, appid = "ef9bb0dd91538d62881342afe14fa979", units="metric")
     # Make HTTP GET call for the given city
     response_new <- GET(forecast_url, query=forecast_query)
     # Note that the 5-day forecast JSON result is a list of lists. You can print the response to check the results
@@ -43,8 +43,8 @@ get_weather_forecaset_by_cities <- function(city_names){
     for(result in results) {
       city <- c(city, results$name)
       weather <- c(weather, results$weather[[1]]$main)
-      visibility < c(visibility, results$main$temp)
-      temp <- c(temp, results$visibility)
+      visibility < c(visibility, results$visibility)
+      temp <- c(temp, results$main$temp)
       temp_max <- c(temp_max, results$main$temp_max)
       temp_min <- c(temp_min, results$main$temp_min)
       pressure <- c(pressure, results$main$pressure)
@@ -55,18 +55,18 @@ get_weather_forecaset_by_cities <- function(city_names){
     }
     
     # Add the R Lists into a data frame
-   df <- data.frame(city=city,
-                           weather=weather,
-                           visibility=visibility,
-                           temp=temp,
-                           temp_min=temp_min,
-                           temp_max=temp_max,
-                           pressure=pressure,
-                           humidity=humidity,
-                           wind_speed=wind_speed,
-                           wind_deg=wind_deg,
-                           forecast_datetime=forecast_datetime
-                           )
+    df <- data.frame(city=city,
+                     weather=weather,
+                     visibility=visibility,
+                     temp=temp,
+                     temp_min=temp_min,
+                     temp_max=temp_max,
+                     pressure=pressure,
+                     humidity=humidity,
+                     wind_speed=wind_speed,
+                     wind_deg=wind_deg,
+                     forecast_datetime=forecast_datetime
+    )
   }
   
   # Return a data frame
